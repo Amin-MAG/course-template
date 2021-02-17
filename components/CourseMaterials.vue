@@ -30,6 +30,7 @@
       <v-row class="my-4">
         <v-col
           v-for="(material, index) in materials.additional"
+          :key="index"
           cols="4">
           <v-card>
             <v-img

@@ -13,7 +13,8 @@
         class="d-flex align-center justify-center">
 
         <v-btn
-          v-for="item in menu"
+          v-for="(item, index) in menu"
+          :key="index"
           color="black"
           v-ripple="{ class: `light-blue--text` }"
           :style="page===item.pageName ? 'background-color: #B3E5FC' : ''"
@@ -33,45 +34,7 @@
       <assignments v-show="page===ASSIGNMENT_PAGE" :assignments="assignments"/>
       <assignments v-show="page===PROJECT_PAGE" :assignments="projects"/>
       <CourseMaterials v-show="page===COURSE_MATERIAL_PAGE" :materials="materials"/>
-
-      <v-row>
-        <v-col>
-          <v-sheet height="400">
-            <v-toolbar flat>
-              <v-btn
-                fab
-                text
-                small
-                color="grey darken-2"
-                @click="prev">
-                <v-icon small>
-                  mdi-chevron-left
-                </v-icon>
-              </v-btn>
-              <v-btn
-                fab
-                text
-                small
-                color="grey darken-2"
-                @click="next">
-                <v-icon small>
-                  mdi-chevron-right
-                </v-icon>
-              </v-btn>
-              <v-toolbar-title v-if="$refs.calendar">
-                {{ $refs.calendar.title }}
-              </v-toolbar-title>
-            </v-toolbar>
-            <v-calendar
-              ref="calendar"
-              v-model="focus"
-              color="primary"
-              :events="schedule.events"
-              :type="type"/>
-          </v-sheet>
-        </v-col>
-      </v-row>
-
+      <Schedule v-show="page===SCHEDULE_PAGE" :events="schedule.events"/>
 
       <v-divider class="my-8"/>
 
@@ -87,9 +50,10 @@
   import About from "../components/About";
   import Footer from "../components/Footer";
   import CourseMaterials from "../components/CourseMaterials";
+  import Schedule from "../components/Schedule";
 
   const HOME_PAGE = 'home';
-  const SCHEDULE_PAGE = 'Schedule';
+  const SCHEDULE_PAGE = 'schedule';
   const ASSIGNMENT_PAGE = 'assignments';
   const PROJECT_PAGE = 'projects';
   const COURSE_MATERIAL_PAGE = 'materials';
@@ -142,11 +106,30 @@
 
       // Schedule
       schedule: {
-        events:[
+        events: [
           {
-            name: 'Mash Potatoes',
-            start: '2021-02-09 12:30',
+            name: 'Event 1',
+            start: '2021-02-01 12:30',
             end: '2021-02-09 15:30',
+            color: 'red'
+          },
+          {
+            name: 'Event 2',
+            start: '2021-02-09 12:30',
+            end: '2021-02-19 15:30',
+            color: 'indigo'
+          },
+          {
+            name: 'Event 3',
+            start: '2021-02-09 12:30',
+            end: '2021-02-15 15:30',
+            color: 'green'
+          },
+          {
+            name: 'Event 4',
+            start: '2021-02-20 12:30',
+            end: '2021-02-24 15:30',
+            color: 'blue'
           },
         ]
       },
@@ -279,14 +262,6 @@
         ]
       }
     }),
-    components: { CourseMaterials, Footer, About },
-    methods: {
-      prev () {
-        this.$refs.calendar.prev()
-      },
-      next () {
-        this.$refs.calendar.next()
-      },
-    }
+    components: { Schedule, CourseMaterials, Footer, About },
   }
 </script>

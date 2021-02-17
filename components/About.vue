@@ -45,7 +45,7 @@
         <v-col cols="8">
           <div class="text-h5">Teacher Assistants</div>
           <v-row>
-            <v-col v-for="ta in people.assistants" cols="3" class="justify-center">
+            <v-col v-for="(ta, index) in people.assistants" :key="index" cols="3" class="justify-center">
               <div
                 class="pa-4 d-flex flex-column align-center justify-center">
                 <v-img
