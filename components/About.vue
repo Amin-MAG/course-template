@@ -1,7 +1,7 @@
 <template>
   <v-row justify="center" align="center" class="mt-4">
-    <v-col cols="1"/>
-    <v-col cols="10" class="justify-center">
+    <v-col lg="1" xl="1" md="1" cols="0"/>
+    <v-col lg="10" xl="10" md="10" cols="12" class="justify-center">
 
       <v-alert
         dense
@@ -28,24 +28,25 @@
       <v-row class="mt-4">
 
         <v-col cols="4" class="justify-center">
-          <div class="text-h5">Professor</div>
+          <div :class="`${textSize.charactersTitle}`">Professor</div>
           <div
             class="pa-4 d-flex flex-column align-center justify-center">
             <v-img
               class="rounded-circle"
-              width="75%"
+              :width="(this.$vuetify.breakpoint.name==='xs') ? '100%' : '75%'"
               :src="people.professor.image"
               :alt="people.professor.name"/>
           </div>
-          <div class="mt-2 text-center text-h6">
+          <div :class="`mt-2 text-center ${textSize.characters}`">
             {{people.professor.name}}
           </div>
         </v-col>
 
         <v-col cols="8">
-          <div class="text-h5">Teacher Assistants</div>
+          <div :class="`${textSize.charactersTitle}`">Teacher Assistants</div>
           <v-row>
-            <v-col v-for="(ta, index) in people.assistants" :key="index" cols="3" class="justify-center">
+            <v-col v-for="(ta, index) in people.assistants" :key="index" :cols="assistantsColumns"
+                   class="justify-center">
               <div
                 class="pa-4 d-flex flex-column align-center justify-center">
                 <v-img
@@ -54,7 +55,7 @@
                   :src="ta.image"
                   :alt="ta.name"/>
               </div>
-              <div class="mt-2 text-center text-h7">
+              <div :class="`mt-2 text-center ${textSize.characters}`">
                 {{ta.name}}
               </div>
             </v-col>
@@ -65,13 +66,58 @@
       </v-row>
 
     </v-col>
-    <v-col cols="1"/>
+    <v-col lg="1" xl="1" md="1" cols="0"/>
   </v-row>
 </template>
 
 <script>
   export default {
     name: "Homepage",
+    computed: {
+      assistantsColumns() {
+        switch (this.$vuetify.breakpoint.name) {
+          case 'xs':
+            return 6;
+          case 'sm':
+            return 4;
+          case 'md':
+            return 4;
+          case 'lg':
+            return 3;
+          case 'xl':
+            return 3;
+        }
+      },
+      textSize() {
+        switch (this.$vuetify.breakpoint.name) {
+          case 'xs':
+            return {
+              charactersTitle: 'text-h8',
+              characters: 'text-caption'
+            };
+          case 'sm':
+            return {
+              charactersTitle: 'text-h8',
+              characters: 'text-caption'
+            };
+          case 'md':
+            return {
+              charactersTitle: 'text-h5',
+              characters: 'text-h7'
+            };
+          case 'lg':
+            return {
+              charactersTitle: 'text-h5',
+              characters: 'text-h7'
+            };
+          case 'xl':
+            return {
+              charactersTitle: 'text-h5',
+              characters: 'text-h7'
+            };
+        }
+      }
+    },
     props: ['people']
   }
 </script>

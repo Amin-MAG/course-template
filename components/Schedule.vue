@@ -4,6 +4,25 @@
       <v-sheet class="mb-2" height="64">
         <v-toolbar class="d-flex flex-column align-center justify-center" flat>
           <v-btn
+            v-if="this.$vuetify.breakpoint.name==='xs'"
+            outlined
+            x-small
+            style="position:fixed; left: 0"
+            color="grey darken-2"
+            @click="setToday">
+            Today
+          </v-btn>
+          <v-btn
+            v-else
+            outlined
+            x-small
+            style="position:fixed; left: 0"
+            color="grey darken-2"
+            @click="setToday">
+            Today
+          </v-btn>
+
+          <v-btn
             fab
             text
             small
@@ -15,7 +34,7 @@
             </v-icon>
           </v-btn>
 
-          <v-toolbar-title class="text-center mx-2 text-h6" v-if="$refs.calendar">
+          <v-toolbar-title :class="`text-center mx-2 ${textSize.month}`" v-if="$refs.calendar">
             {{ $refs.calendar.title }}
           </v-toolbar-title>
 
@@ -35,18 +54,7 @@
         </v-toolbar>
       </v-sheet>
 
-      <div class="mb-6 d-flex flex-column align-center justify-center">
-        <v-btn
-          outlined
-          class="mx-auto"
-          color="grey darken-2"
-          @click="setToday">
-          Today
-        </v-btn>
-
-      </div>
-
-      <v-sheet height="600">
+      <v-sheet class="mb-8" height="600">
         <v-calendar
           ref="calendar"
           v-model="focus"
@@ -62,27 +70,51 @@
 <script>
   export default {
     name: "Schedule",
-    data: ()=>({
+    data: () => ({
       focus: '',
     }),
-    mounted () {
+    mounted() {
       this.$refs.calendar.checkChange();
+      this.setToday();
+    },
+    computed: {
+      textSize() {
+        switch (this.$vuetify.breakpoint.name) {
+          case 'xs':
+            return {
+              month: 'text-caption',
+            };
+          case 'sm':
+            return {
+              month: 'text-h6',
+            };
+          case 'md':
+            return {
+              month: 'text-h6',
+            };
+          case 'lg':
+            return {
+              month: 'text-h6',
+            };
+          case 'xl':
+            return {
+              month: 'text-h6',
+            };
+        }
+      }
     },
     methods: {
       getEventColor(event) {
         return event.color
       },
       setToday() {
-        this.focus = ''
+        this.focus = new Date()
       },
       prev() {
         this.$refs.calendar.prev()
       },
       next() {
         this.$refs.calendar.next()
-      },
-      rnd(a, b) {
-        return Math.floor((b - a + 1) * Math.random()) + a
       },
     },
     props: ['events']

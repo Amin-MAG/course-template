@@ -1,16 +1,16 @@
 <template>
   <v-row justify="center" align="center">
-    <v-col cols="1"/>
-    <v-col cols="10" class="justify-center">
+    <v-col lg="1" xl="1" cols="0"/>
+    <v-col lg="10" xl="10" cols="12" class="justify-center">
 
       <div class="pa-5">
-        <div class="text-center text-h1 pa-2">{{course.title}}</div>
-        <div class="text-center text-h4 blue-grey--text mt-4">{{course.subtitle}}</div>
+        <div :class="`text-center ${textSize.courseTitle} pa-2`">{{course.title}}</div>
+        <div :class="`text-center ${textSize.courseDescription} blue-grey--text mt-4`">{{course.subtitle}}</div>
       </div>
 
 
-      <div
-        class="d-flex align-center justify-center">
+      <div v-if="isMainMenuVisible"
+           class="d-flex align-center justify-center">
 
         <v-btn
           v-for="(item, index) in menu"
@@ -36,12 +36,22 @@
       <CourseMaterials v-show="page===COURSE_MATERIAL_PAGE" :materials="materials"/>
       <Schedule v-show="page===SCHEDULE_PAGE" :events="schedule.events"/>
 
-      <v-divider class="my-8"/>
+      <div v-if="!isMainMenuVisible" class="bottom-nav">
+        <v-bottom-navigation
+          v-model="value"
+          color="blue">
 
-      <Footer/>
+          <v-btn v-for="(item, index) in bottomNavigationMenu" :key="index" @click="page=item.pageName">
+            <span class="text-caption pt-1">{{item.text}}</span>
+            <v-icon>{{item.icon}}</v-icon>
+          </v-btn>
+
+
+        </v-bottom-navigation>
+      </div>
 
     </v-col>
-    <v-col cols="1"/>
+    <v-col lg="1" xl="1" cols="0"/>
   </v-row>
 </template>
 
@@ -70,10 +80,53 @@
       ASSIGNMENT_PAGE: () => ASSIGNMENT_PAGE,
       PROJECT_PAGE: () => PROJECT_PAGE,
       COURSE_MATERIAL_PAGE: () => COURSE_MATERIAL_PAGE,
+      isMainMenuVisible() {
+        switch (this.$vuetify.breakpoint.name) {
+          case 'xs':
+            return false;
+          case 'sm':
+            return false;
+          case 'md':
+            return true;
+          case 'lg':
+            return true;
+          case 'xl':
+            return true;
+        }
+      },
+      textSize() {
+        switch (this.$vuetify.breakpoint.name) {
+          case 'xs':
+            return {
+              courseTitle: 'text-h4',
+              courseDescription: 'text-h8',
+            };
+          case 'sm':
+            return {
+              courseTitle: 'text-h2',
+              courseDescription: 'text-h6',
+            };
+          case 'md':
+            return {
+              courseTitle: 'text-h1',
+              courseDescription: 'text-h4',
+            };
+          case 'lg':
+            return {
+              courseTitle: 'text-h1',
+              courseDescription: 'text-h4',
+            };
+          case 'xl':
+            return {
+              courseTitle: 'text-h1',
+              courseDescription: 'text-h4',
+            };
+        }
+      }
     },
     data: () => ({
       page: SCHEDULE_PAGE,
-
+      value: 1,
       // Course Details
       course: {
         title: "Course Name",
@@ -84,23 +137,47 @@
       menu: [
         {
           pageName: HOME_PAGE,
-          text: "Home"
+          text: "Home",
         },
         {
-          pageName: "schedule",
-          text: "Schedule"
+          pageName: SCHEDULE_PAGE,
+          text: "Schedule",
         },
         {
-          pageName: "assignments",
-          text: "Assignments"
+          pageName: ASSIGNMENT_PAGE,
+          text: "Assignments",
         },
         {
-          pageName: "projects",
-          text: "Projects"
+          pageName: PROJECT_PAGE,
+          text: "Projects",
         },
         {
-          pageName: "materials",
-          text: "Course Materials"
+          pageName: COURSE_MATERIAL_PAGE,
+          text: "Resources",
+        },
+      ],
+
+      // Bottom Navigation
+      bottomNavigationMenu: [
+        {
+          pageName: SCHEDULE_PAGE,
+          text: "Schedule",
+          icon: 'mdi-calendar'
+        },
+        {
+          pageName: ASSIGNMENT_PAGE,
+          text: "Assignments",
+          icon: 'mdi-book-open'
+        },
+        {
+          pageName: PROJECT_PAGE,
+          text: "Projects",
+          icon: 'mdi-rocket'
+        },
+        {
+          pageName: COURSE_MATERIAL_PAGE,
+          text: "References",
+          icon: 'mdi-book'
         },
       ],
 
@@ -265,3 +342,13 @@
     components: { Schedule, CourseMaterials, Footer, About },
   }
 </script>
+
+<style scoped lang="scss">
+  .bottom-nav {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+  }
+</style>

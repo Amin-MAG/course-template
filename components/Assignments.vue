@@ -10,11 +10,10 @@
           <v-list-item-avatar>
             <v-icon color="blue">mdi-book</v-icon>
           </v-list-item-avatar>
-          <v-list-item-title v-text="assignment.name"/>
+          <v-list-item-title :class="`${textSize.assignmentText}`" v-text="assignment.name"/>
           <v-list-item-action>
             <v-btn text>
               <v-icon class="mr-2" color="green">mdi-download</v-icon>
-              Download
             </v-btn>
           </v-list-item-action>
         </v-list-item>
@@ -27,6 +26,32 @@
 <script>
   export default {
     name: "Assignments",
+    computed: {
+      textSize() {
+        switch (this.$vuetify.breakpoint.name) {
+          case 'xs':
+            return {
+              assignmentText: 'text-caption',
+            };
+          case 'sm':
+            return {
+              assignmentText: 'text-body-1',
+            };
+          case 'md':
+            return {
+              assignmentText: 'text-body-1',
+            };
+          case 'lg':
+            return {
+              assignmentText: 'text-body-1',
+            };
+          case 'xl':
+            return {
+              assignmentText: 'text-body-1',
+            };
+        }
+      }
+    },
     props: ['assignments']
   }
 </script>

@@ -2,12 +2,12 @@
   <v-row justify="center" align="center" class="mt-4">
     <v-col cols="1"/>
     <v-col cols="10" class="justify-center">
-      <div class="text-h4">Main Book</div>
+      <div :class="`${textSize.title}`">Main Book</div>
       <v-row class="my-4">
         <v-col
           v-for="(material, index) in materials.main"
           :key="index"
-          cols="4">
+          :cols="materialsColumns">
           <v-card>
             <v-img :src="material.cover"/>
             <v-card-title>{{material.name}}</v-card-title>
@@ -26,12 +26,12 @@
       </v-row>
 
 
-      <div class="text-h4 mt-8">Additional Resources</div>
+      <div :class="`${textSize.title} mt-8`">Additional Resources</div>
       <v-row class="my-4">
         <v-col
           v-for="(material, index) in materials.additional"
           :key="index"
-          cols="4">
+          :cols="materialsColumns">
           <v-card>
             <v-img
               :src="material.cover"/>
@@ -57,6 +57,46 @@
 <script>
   export default {
     name: "CourseMaterials",
+    computed: {
+      materialsColumns() {
+        switch (this.$vuetify.breakpoint.name) {
+          case 'xs':
+            return 12;
+          case 'sm':
+            return 4;
+          case 'md':
+            return 4;
+          case 'lg':
+            return 4;
+          case 'xl':
+            return 4;
+        }
+      },
+      textSize() {
+        switch (this.$vuetify.breakpoint.name) {
+          case 'xs':
+            return {
+              title: 'text-body-1',
+            };
+          case 'sm':
+            return {
+              title: 'text-body-1',
+            };
+          case 'md':
+            return {
+              title: 'text-h4',
+            };
+          case 'lg':
+            return {
+              title: 'text-h4',
+            };
+          case 'xl':
+            return {
+              title: 'text-h4',
+            };
+        }
+      }
+    },
     props: ['materials']
   }
 </script>
