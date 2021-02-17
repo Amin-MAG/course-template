@@ -125,8 +125,8 @@
       }
     },
     data: () => ({
-      page: SCHEDULE_PAGE,
-      value: 1,
+      page: HOME_PAGE,
+      value: -1,
       // Course Details
       course: {
         title: "Course Name",

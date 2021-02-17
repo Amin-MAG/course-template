@@ -1,13 +1,16 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
-  // Target: https://go.nuxtjs.dev/config-target
+  // Disable server-side rendering (https://go.nuxtjs.dev/ssr-mode)
+  ssr: false,
+
+  // Target (https://go.nuxtjs.dev/config-target)
   target: 'static',
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - course-website',
-    title: 'course-website',
+    titleTemplate: '%s - Course',
+    title: 'Web Course',
     htmlAttrs: {
       lang: 'en'
     },
