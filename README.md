@@ -1,4 +1,4 @@
-# course-website
+# Course Website
 
 ## Build Setup
 
