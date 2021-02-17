@@ -4,8 +4,8 @@
     <v-col cols="10" class="justify-center">
 
       <div class="pa-5">
-        <div class="text-center text-h1 pa-2">Course Name</div>
-        <div class="text-center text-h4 blue-grey--text mt-4">More Details about course</div>
+        <div class="text-center text-h1 pa-2">{{course.title}}</div>
+        <div class="text-center text-h4 blue-grey--text mt-4">{{course.subtitle}}</div>
       </div>
 
 
@@ -31,6 +31,47 @@
 
       <about v-show="page===HOME_PAGE" :people="people"/>
       <assignments v-show="page===ASSIGNMENT_PAGE" :assignments="assignments"/>
+      <assignments v-show="page===PROJECT_PAGE" :assignments="projects"/>
+      <CourseMaterials v-show="page===COURSE_MATERIAL_PAGE" :materials="materials"/>
+
+      <v-row>
+        <v-col>
+          <v-sheet height="400">
+            <v-toolbar flat>
+              <v-btn
+                fab
+                text
+                small
+                color="grey darken-2"
+                @click="prev">
+                <v-icon small>
+                  mdi-chevron-left
+                </v-icon>
+              </v-btn>
+              <v-btn
+                fab
+                text
+                small
+                color="grey darken-2"
+                @click="next">
+                <v-icon small>
+                  mdi-chevron-right
+                </v-icon>
+              </v-btn>
+              <v-toolbar-title v-if="$refs.calendar">
+                {{ $refs.calendar.title }}
+              </v-toolbar-title>
+            </v-toolbar>
+            <v-calendar
+              ref="calendar"
+              v-model="focus"
+              color="primary"
+              :events="schedule.events"
+              :type="type"/>
+          </v-sheet>
+        </v-col>
+      </v-row>
+
 
       <v-divider class="my-8"/>
 
@@ -45,20 +86,35 @@
 
   import About from "../components/About";
   import Footer from "../components/Footer";
+  import CourseMaterials from "../components/CourseMaterials";
 
   const HOME_PAGE = 'home';
+  const SCHEDULE_PAGE = 'Schedule';
   const ASSIGNMENT_PAGE = 'assignments';
+  const PROJECT_PAGE = 'projects';
+  const COURSE_MATERIAL_PAGE = 'materials';
 
   const MALE_PROFILE = require('../static/images/profile-boy.jpg');
   const FEMALE_PROFILE = require('../static/images/profile-girl.jpg');
+  const REF_BOOK_1 = require('../static/images/ref_book1.jpg');
+  const REF_BOOK_2 = require('../static/images/ref_book2.jpg');
 
   export default {
     computed: {
       HOME_PAGE: () => HOME_PAGE,
+      SCHEDULE_PAGE: () => SCHEDULE_PAGE,
       ASSIGNMENT_PAGE: () => ASSIGNMENT_PAGE,
+      PROJECT_PAGE: () => PROJECT_PAGE,
+      COURSE_MATERIAL_PAGE: () => COURSE_MATERIAL_PAGE,
     },
     data: () => ({
-      page: ASSIGNMENT_PAGE,
+      page: SCHEDULE_PAGE,
+
+      // Course Details
+      course: {
+        title: "Course Name",
+        subtitle: "More Details about course"
+      },
 
       // Main Menu
       menu: [
@@ -84,6 +140,17 @@
         },
       ],
 
+      // Schedule
+      schedule: {
+        events:[
+          {
+            name: 'Mash Potatoes',
+            start: '2021-02-09 12:30',
+            end: '2021-02-09 15:30',
+          },
+        ]
+      },
+
       // Assignments
       assignments: [
         {
@@ -104,6 +171,22 @@
         },
         {
           name: "Assignment number 5",
+          file: ''
+        }
+      ],
+
+      // Projects
+      projects: [
+        {
+          name: "Project number 1",
+          file: ''
+        },
+        {
+          name: "Project number 2",
+          file: ''
+        },
+        {
+          name: "Project number 3",
           file: ''
         }
       ],
@@ -155,9 +238,55 @@
             name: "Assistant 10",
             image: MALE_PROFILE
           }
+        ],
+      },
+
+      // References
+      materials: {
+        main: [
+          {
+            name: "Reference 1",
+            description: "This book is Reference 1",
+            cover: REF_BOOK_1,
+          },
+          {
+            name: "Reference 2",
+            description: "This book is Reference 2",
+            cover: REF_BOOK_2,
+          }
+        ],
+        additional: [
+          {
+            name: "Reference 1",
+            description: "This book is Reference 1",
+            cover: REF_BOOK_2,
+          },
+          {
+            name: "Reference 2",
+            description: "This book is Reference 2",
+            cover: REF_BOOK_1,
+          },
+          {
+            name: "Reference 3",
+            description: "This book is Reference 3",
+            cover: REF_BOOK_2,
+          },
+          {
+            name: "Reference 4",
+            description: "This book is Reference 4",
+            cover: REF_BOOK_1,
+          }
         ]
       }
     }),
-    components: { Footer, About }
+    components: { CourseMaterials, Footer, About },
+    methods: {
+      prev () {
+        this.$refs.calendar.prev()
+      },
+      next () {
+        this.$refs.calendar.next()
+      },
+    }
   }
 </script>
