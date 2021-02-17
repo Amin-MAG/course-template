@@ -29,7 +29,8 @@
 
       <v-divider/>
 
-      <homepage v-show="page===HOME_PAGE" :people="people"/>
+      <about v-show="page===HOME_PAGE" :people="people"/>
+      <assignments v-show="page===ASSIGNMENT_PAGE" :assignments="assignments"/>
 
       <v-divider class="my-8"/>
 
@@ -42,10 +43,11 @@
 
 <script>
 
-  import Homepage from "../components/Homepage";
+  import About from "../components/About";
   import Footer from "../components/Footer";
 
   const HOME_PAGE = 'home';
+  const ASSIGNMENT_PAGE = 'assignments';
 
   const MALE_PROFILE = require('../static/images/profile-boy.jpg');
   const FEMALE_PROFILE = require('../static/images/profile-girl.jpg');
@@ -53,15 +55,19 @@
   export default {
     computed: {
       HOME_PAGE: () => HOME_PAGE,
+      ASSIGNMENT_PAGE: () => ASSIGNMENT_PAGE,
     },
     data: () => ({
+      page: ASSIGNMENT_PAGE,
+
+      // Main Menu
       menu: [
         {
           pageName: HOME_PAGE,
           text: "Home"
         },
         {
-          pageName: "Schedule",
+          pageName: "schedule",
           text: "Schedule"
         },
         {
@@ -77,8 +83,32 @@
           text: "Course Materials"
         },
       ],
-      page: "home",
 
+      // Assignments
+      assignments: [
+        {
+          name: "Assignment number 1",
+          file: ''
+        },
+        {
+          name: "Assignment number 2",
+          file: ''
+        },
+        {
+          name: "Assignment number 3",
+          file: ''
+        },
+        {
+          name: "Assignment number 4",
+          file: ''
+        },
+        {
+          name: "Assignment number 5",
+          file: ''
+        }
+      ],
+
+      // Characters
       people: {
         professor: {
           name: "Professor",
@@ -128,6 +158,6 @@
         ]
       }
     }),
-    components: { Footer, Homepage }
+    components: { Footer, About }
   }
 </script>
