@@ -1,0 +1,10 @@
+{
+  "name": "web-course",
+  "short_name": "web-course",
+  "description": "## Build Setup",
+  "icons": [],
+  "start_url": "/web-course/?standalone=true",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "lang": "en"
+}
