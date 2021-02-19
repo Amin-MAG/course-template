@@ -28,7 +28,7 @@
       <v-row class="mt-4">
 
         <v-col cols="4" class="justify-center">
-          <div :class="`${textSize.charactersTitle}`">Professor</div>
+          <div :class="`${textSize.charactersTitle} ${textSize.charactersTitleAlign}`">Professor</div>
           <div
             class="pa-4 d-flex flex-column align-center justify-center">
             <v-img
@@ -43,7 +43,7 @@
         </v-col>
 
         <v-col cols="8">
-          <div :class="`${textSize.charactersTitle}`">Teacher Assistants</div>
+          <div :class="`${textSize.charactersTitle} ${textSize.charactersTitleAlign}`">Teacher Assistants</div>
           <v-row>
             <v-col v-for="(ta, index) in people.assistants" :key="index" :cols="assistantsColumns"
                    class="justify-center">
@@ -93,27 +93,32 @@
           case 'xs':
             return {
               charactersTitle: 'text-h8',
-              characters: 'text-caption'
+              characters: 'text-caption',
+              charactersTitleAlign: 'text-center'
             };
           case 'sm':
             return {
               charactersTitle: 'text-h8',
-              characters: 'text-caption'
+              characters: 'text-caption',
+              charactersTitleAlign: 'text-center'
             };
           case 'md':
             return {
               charactersTitle: 'text-h5',
-              characters: 'text-h7'
+              characters: 'text-h7',
+              charactersTitleAlign: ''
             };
           case 'lg':
             return {
               charactersTitle: 'text-h5',
-              characters: 'text-h7'
+              characters: 'text-h7',
+              charactersTitleAlign: ''
             };
           case 'xl':
             return {
               charactersTitle: 'text-h5',
-              characters: 'text-h7'
+              characters: 'text-h7',
+              charactersTitleAlign: ''
             };
         }
       }

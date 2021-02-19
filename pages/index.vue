@@ -30,11 +30,13 @@
 
       <v-divider/>
 
-      <about v-show="page===HOME_PAGE" :people="people"/>
-      <Schedule v-show="page===SCHEDULE_PAGE" :events="schedule.events"/>
-      <Assignments v-show="page===ASSIGNMENT_PAGE" :assignments="assignments"/>
-      <Assignments v-show="page===PROJECT_PAGE" :assignments="projects"/>
-      <CourseMaterials v-show="page===COURSE_MATERIAL_PAGE" :materials="materials"/>
+      <div class="pa-2">
+        <about v-show="page===HOME_PAGE" :people="people"/>
+        <Schedule v-show="page===SCHEDULE_PAGE" :events="schedule.events"/>
+        <Assignments v-show="page===ASSIGNMENT_PAGE" :assignments="assignments"/>
+        <Assignments v-show="page===PROJECT_PAGE" :assignments="projects"/>
+        <CourseMaterials v-show="page===COURSE_MATERIAL_PAGE" :materials="materials"/>
+      </div>
 
       <div v-if="!isMainMenuVisible" class="bottom-nav">
         <v-bottom-navigation

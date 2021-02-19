@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-main>
-      <v-container class="mt-10">
+      <v-container :class="`${sizes.headingTopMargin}`">
         <nuxt/>
       </v-container>
     </v-main>
@@ -9,5 +9,32 @@
 </template>
 
 <script>
-  export default {}
+  export default {
+    computed: {
+      sizes() {
+        switch (this.$vuetify.breakpoint.name) {
+          case 'xs':
+            return {
+              headingTopMargin: 'mt-0'
+            };
+          case 'sm':
+            return {
+              headingTopMargin: 'mt-2'
+            };
+          case 'md':
+            return {
+              headingTopMargin: 'mt-4'
+            };
+          case 'lg':
+            return {
+              headingTopMargin: 'mt-10'
+            };
+          case 'xl':
+            return {
+              headingTopMargin: 'mt-10'
+            };
+        }
+      }
+    }
+  }
 </script>
