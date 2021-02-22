@@ -8,8 +8,9 @@
           v-for="(material, index) in materials.main"
           :key="index"
           :cols="materialsColumns">
-          <v-card>
-            <v-img :src="material.cover" max-height="400"/>
+          <v-card
+          height="600">
+            <v-img :src="material.cover" height="400"/>
             <v-card-title>{{material.name}}</v-card-title>
             <v-card-text>
               <div>{{material.description}}</div>
@@ -63,11 +64,11 @@
           case 'xs':
             return 12;
           case 'sm':
-            return 4;
+            return 6;
           case 'md':
-            return 4;
+            return 6;
           case 'lg':
-            return 4;
+            return 6;
           case 'xl':
             return 4;
         }
