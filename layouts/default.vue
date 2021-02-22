@@ -3,6 +3,7 @@
     <v-main>
       <v-container :class="`${sizes.headingTopMargin}`">
         <nuxt/>
+        <Footer/>
       </v-container>
     </v-main>
   </v-app>
