@@ -34,6 +34,7 @@
               class="rounded-circle"
               :width="(this.$vuetify.breakpoint.name==='xs') ? '100%' : '75%'"
               :src="people.professor.image"
+              aspect-ratio="1"
               :alt="people.professor.name"/>
           </div>
           <div :class="`mt-2 text-center ${textSize.characters}`">
@@ -51,6 +52,7 @@
                 <v-img
                   class="rounded-circle"
                   width="100%"
+                  aspect-ratio="1"
                   :src="ta.image"
                   :alt="ta.name"/>
               </div>

@@ -27,11 +27,11 @@
             };
           case 'lg':
             return {
-              headingTopMargin: 'my-10'
+              headingTopMargin: 'my-5'
             };
           case 'xl':
             return {
-              headingTopMargin: 'my-10'
+              headingTopMargin: 'my-5'
             };
         }
       }

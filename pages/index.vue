@@ -3,32 +3,34 @@
     <v-col lg="1" xl="1" cols="0"/>
     <v-col lg="10" xl="10" cols="12" class="justify-center">
 
-      <div class="pa-5">
-        <div :class="`text-center ${textSize.courseTitle} pa-2`">{{course.title}}</div>
-        <div :class="`text-center ${textSize.courseDescription} blue-grey--text mt-4`">{{course.subtitle}}</div>
+      <div class="yellow lighten-3 elevation-6 pa-2">
+        <div class="pa-5">
+          <div class="d-flex align-center justify-center">
+            <v-img :src="LOGO" max-width="100"/>
+          </div>
+          <div :class="`text-center ${textSize.courseTitle} pa-2`">{{course.title}}</div>
+        </div>
+
+
+        <div v-if="isMainMenuVisible"
+             class="d-flex align-center justify-center">
+
+          <v-btn
+            v-for="(item, index) in menu"
+            :key="index"
+            color="black"
+            v-ripple="{ class: `light-blue--text` }"
+            :style="page===item.pageName ? 'background-color: #B3E5FC' : ''"
+            @click="page=item.pageName"
+            tile
+            text
+            large>
+            {{item.text}}
+            <v-icon class="ml-2">{{item.icon}}</v-icon>
+          </v-btn>
+
+        </div>
       </div>
-
-
-      <div v-if="isMainMenuVisible"
-           class="d-flex align-center justify-center">
-
-        <v-btn
-          v-for="(item, index) in menu"
-          :key="index"
-          color="black"
-          v-ripple="{ class: `light-blue--text` }"
-          :style="page===item.pageName ? 'background-color: #B3E5FC' : ''"
-          @click="page=item.pageName"
-          tile
-          text
-          large>
-          {{item.text}}
-        </v-btn>
-
-      </div>
-
-
-      <v-divider/>
 
       <div class="pa-2">
         <about v-show="page===HOME_PAGE" :people="people" :course-description="course.description"/>
@@ -71,6 +73,10 @@
   const PROJECT_PAGE = 'projects';
   const COURSE_MATERIAL_PAGE = 'materials';
 
+  // Site Images
+  const LOGO = require('../static/images/iust.png');
+
+  // Profile images
   const MALE_PROFILE = require('../static/images/profile-boy.jpg');
   const FEMALE_PROFILE = require('../static/images/profile-girl.jpg');
   const REF_BOOK_1 = require('../static/images/ref_book1.jpg');
@@ -83,6 +89,8 @@
       ASSIGNMENT_PAGE: () => ASSIGNMENT_PAGE,
       PROJECT_PAGE: () => PROJECT_PAGE,
       COURSE_MATERIAL_PAGE: () => COURSE_MATERIAL_PAGE,
+      // Images
+      LOGO: () => LOGO,
       isMainMenuVisible() {
         switch (this.$vuetify.breakpoint.name) {
           case 'xs':
@@ -111,17 +119,17 @@
             };
           case 'md':
             return {
-              courseTitle: 'text-h1',
+              courseTitle: 'text-h2',
               courseDescription: 'text-h4',
             };
           case 'lg':
             return {
-              courseTitle: 'text-h1',
+              courseTitle: 'text-h2',
               courseDescription: 'text-h4',
             };
           case 'xl':
             return {
-              courseTitle: 'text-h1',
+              courseTitle: 'text-h2',
               courseDescription: 'text-h4',
             };
         }
@@ -142,22 +150,27 @@
         {
           pageName: HOME_PAGE,
           text: "Home",
+          icon: 'mdi-home'
         },
         {
           pageName: SCHEDULE_PAGE,
           text: "Schedule",
+          icon: 'mdi-calendar'
         },
         {
           pageName: ASSIGNMENT_PAGE,
           text: "Assignments",
+          icon: 'mdi-book-open'
         },
         {
           pageName: PROJECT_PAGE,
           text: "Projects",
+          icon: 'mdi-rocket'
         },
         {
           pageName: COURSE_MATERIAL_PAGE,
           text: "Resources",
+          icon: 'mdi-book'
         },
       ],
 
@@ -189,9 +202,9 @@
       schedule: {
         events: [
           {
-            name: 'Event 1',
-            start: '2021-02-01 9:00',
-            end: '2021-02-09 9:00',
+            name: 'Introduction',
+            start: '2021-02-25 18:00',
+            end: '2021-02-25 20:00',
             color: 'red'
           },
           {
@@ -241,18 +254,18 @@
 
       // Projects
       projects: [
-        {
-          name: "Project number 1",
-          file: ''
-        },
-        {
-          name: "Project number 2",
-          file: ''
-        },
-        {
-          name: "Project number 3",
-          file: ''
-        }
+        // {
+        //   name: "Project number 1",
+        //   file: ''
+        // },
+        // {
+        //   name: "Project number 2",
+        //   file: ''
+        // },
+        // {
+        //   name: "Project number 3",
+        //   file: ''
+        // }
       ],
 
       // Characters
