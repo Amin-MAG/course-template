@@ -15,23 +15,23 @@
         switch (this.$vuetify.breakpoint.name) {
           case 'xs':
             return {
-              headingTopMargin: 'mt-0'
+              headingTopMargin: 'my-0'
             };
           case 'sm':
             return {
-              headingTopMargin: 'mt-2'
+              headingTopMargin: 'my-2'
             };
           case 'md':
             return {
-              headingTopMargin: 'mt-4'
+              headingTopMargin: 'my-4'
             };
           case 'lg':
             return {
-              headingTopMargin: 'mt-10'
+              headingTopMargin: 'my-10'
             };
           case 'xl':
             return {
-              headingTopMargin: 'mt-10'
+              headingTopMargin: 'my-10'
             };
         }
       }

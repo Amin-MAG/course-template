@@ -31,7 +31,7 @@
       <v-divider/>
 
       <div class="pa-2">
-        <about v-show="page===HOME_PAGE" :people="people"/>
+        <about v-show="page===HOME_PAGE" :people="people" :course-description="course.description"/>
         <Schedule v-show="page===SCHEDULE_PAGE" :events="schedule.events"/>
         <Assignments v-show="page===ASSIGNMENT_PAGE" :assignments="assignments"/>
         <Assignments v-show="page===PROJECT_PAGE" :assignments="projects"/>
@@ -62,6 +62,7 @@
   import About from "../components/About";
   import Footer from "../components/Footer";
   import CourseMaterials from "../components/CourseMaterials";
+  import Assignments from "../components/Assignments";
   import Schedule from "../components/Schedule";
 
   const HOME_PAGE = 'home';
@@ -132,7 +133,8 @@
       // Course Details
       course: {
         title: "Course Name",
-        subtitle: "More Details about course"
+        subtitle: "More Details about course",
+        description: "The theory of computation includes several topics: automata theory, formal languages and grammars, computability, and complexity. Together, this material constitutes the theoretical foundation of computer science. Loosely speaking we can think of automata, grammars, and computability as the study of what can be done by computers in principle, while complexity addresses what can be done in practice...",
       },
 
       // Main Menu
@@ -188,8 +190,8 @@
         events: [
           {
             name: 'Event 1',
-            start: '2021-02-01 12:30',
-            end: '2021-02-09 15:30',
+            start: '2021-02-01 9:00',
+            end: '2021-02-09 9:00',
             color: 'red'
           },
           {
@@ -341,7 +343,7 @@
         ]
       }
     }),
-    components: { Schedule, CourseMaterials, Footer, About },
+    components: { Schedule, CourseMaterials, Footer, About, Assignments },
   }
 </script>
 
