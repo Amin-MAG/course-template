@@ -10,31 +10,31 @@
         <strong>Announcements:</strong>
         <br style="clear: both">
         <ul>
-          <li>Announcement 1</li>
-          <li>Announcement 2</li>
-          <li>Announcement 3</li>
+          <li>Welcome !!</li>
+          <!--          <li>Announcement 2</li>-->
+          <!--          <li>Announcement 3</li>-->
         </ul>
       </v-alert>
 
       <div class="mt-6">
         <div class="text-h5">Course Description</div>
-        <div class="mt-2 text-body-1">In higher education in various countries, such as Canada, Israel, Nigeria and
-          the United States, a course is a unit of teaching that typically lasts one academic term, is led by one or
-          more instructors, and has a fixed roster of students. A course usually covers an individual subject.
+        <div class="mt-2 text-body-1">
+          {{courseDescription}}
         </div>
       </div>
 
 
       <v-row class="mt-4">
 
-        <v-col cols="4" class="justify-center">
-          <div :class="`${textSize.charactersTitle} ${textSize.charactersTitleAlign}`">Professor</div>
+        <v-col :cols="12-columns.assistants-columns.distance" class="justify-center">
+          <div :class="`${textSize.charactersTitle} ${textSize.charactersTitleAlign}`">Instructor</div>
           <div
             class="pa-4 d-flex flex-column align-center justify-center">
             <v-img
               class="rounded-circle"
-              :width="(this.$vuetify.breakpoint.name==='xs') ? '100%' : '75%'"
+              width="100%"
               :src="people.professor.image"
+              aspect-ratio="1"
               :alt="people.professor.name"/>
           </div>
           <div :class="`mt-2 text-center ${textSize.characters}`">
@@ -42,16 +42,20 @@
           </div>
         </v-col>
 
-        <v-col cols="8">
-          <div :class="`${textSize.charactersTitle} ${textSize.charactersTitleAlign}`">Teacher Assistants</div>
+        <v-col v-if="columns.distance!==0" :cols="columns.distance"/>
+
+
+        <v-col :cols="columns.assistants">
+          <div :class="`${textSize.charactersTitle} ${textSize.charactersTitleAlign}`">Teaching Assistants</div>
           <v-row>
-            <v-col v-for="(ta, index) in people.assistants" :key="index" :cols="assistantsColumns"
+            <v-col v-for="(ta, index) in people.assistants" :key="index" :cols="columns.assistant"
                    class="justify-center">
               <div
                 class="pa-4 d-flex flex-column align-center justify-center">
                 <v-img
                   class="rounded-circle"
                   width="100%"
+                  aspect-ratio="1"
                   :src="ta.image"
                   :alt="ta.name"/>
               </div>
@@ -74,18 +78,38 @@
   export default {
     name: "Homepage",
     computed: {
-      assistantsColumns() {
+      columns() {
         switch (this.$vuetify.breakpoint.name) {
           case 'xs':
-            return 6;
+            return {
+              assistants: 8,
+              assistant: 6,
+              distance: 0,
+            };
           case 'sm':
-            return 4;
+            return {
+              assistants: 9,
+              assistant: 4,
+              distance: 0,
+            };
           case 'md':
-            return 4;
+            return {
+              assistants: 9,
+              assistant: 4,
+              distance: 0,
+            };
           case 'lg':
-            return 3;
+            return {
+              assistants: 9,
+              assistant: 4,
+              distance: 0,
+            };
           case 'xl':
-            return 3;
+            return {
+              assistants: 8,
+              assistant: 3,
+              distance: 2,
+            };
         }
       },
       textSize() {
@@ -123,7 +147,7 @@
         }
       }
     },
-    props: ['people']
+    props: ['people', 'courseDescription']
   }
 </script>
 

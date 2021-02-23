@@ -3,35 +3,37 @@
     <v-col lg="1" xl="1" cols="0"/>
     <v-col lg="10" xl="10" cols="12" class="justify-center">
 
-      <div class="pa-5">
-        <div :class="`text-center ${textSize.courseTitle} pa-2`">{{course.title}}</div>
-        <div :class="`text-center ${textSize.courseDescription} blue-grey--text mt-4`">{{course.subtitle}}</div>
+      <div class="yellow lighten-3 elevation-6 pa-2">
+        <div class="pa-5">
+          <div class="d-flex align-center justify-center">
+            <v-img :src="LOGO" max-width="100"/>
+          </div>
+          <div :class="`text-center ${textSize.courseTitle} pa-2`">{{course.title}}</div>
+        </div>
+
+
+        <div v-if="isMainMenuVisible"
+             class="d-flex align-center justify-center">
+
+          <v-btn
+            v-for="(item, index) in menu"
+            :key="index"
+            color="black"
+            v-ripple="{ class: `light-blue--text` }"
+            :style="page===item.pageName ? 'background-color: #B3E5FC' : ''"
+            @click="page=item.pageName"
+            tile
+            text
+            large>
+            {{item.text}}
+            <v-icon class="ml-2">{{item.icon}}</v-icon>
+          </v-btn>
+
+        </div>
       </div>
-
-
-      <div v-if="isMainMenuVisible"
-           class="d-flex align-center justify-center">
-
-        <v-btn
-          v-for="(item, index) in menu"
-          :key="index"
-          color="black"
-          v-ripple="{ class: `light-blue--text` }"
-          :style="page===item.pageName ? 'background-color: #B3E5FC' : ''"
-          @click="page=item.pageName"
-          tile
-          text
-          large>
-          {{item.text}}
-        </v-btn>
-
-      </div>
-
-
-      <v-divider/>
 
       <div class="pa-2">
-        <about v-show="page===HOME_PAGE" :people="people"/>
+        <about v-show="page===HOME_PAGE" :people="people" :course-description="course.description"/>
         <Schedule v-show="page===SCHEDULE_PAGE" :events="schedule.events"/>
         <Assignments v-show="page===ASSIGNMENT_PAGE" :assignments="assignments"/>
         <Assignments v-show="page===PROJECT_PAGE" :assignments="projects"/>
@@ -40,7 +42,6 @@
 
       <div v-if="!isMainMenuVisible" class="bottom-nav">
         <v-bottom-navigation
-          v-model="value"
           color="blue">
 
           <v-btn v-for="(item, index) in bottomNavigationMenu" :key="index" @click="page=item.pageName">
@@ -62,6 +63,7 @@
   import About from "../components/About";
   import Footer from "../components/Footer";
   import CourseMaterials from "../components/CourseMaterials";
+  import Assignments from "../components/Assignments";
   import Schedule from "../components/Schedule";
 
   const HOME_PAGE = 'home';
@@ -70,11 +72,16 @@
   const PROJECT_PAGE = 'projects';
   const COURSE_MATERIAL_PAGE = 'materials';
 
+  // Site Images
+  const LOGO = require('../static/images/iust.png');
+
+  // Profile images
   const MALE_PROFILE = require('../static/images/profile-boy.jpg');
   const FEMALE_PROFILE = require('../static/images/profile-girl.jpg');
   const REF_BOOK_1 = require('../static/images/ref_book1.jpg');
   const REF_BOOK_2 = require('../static/images/ref_book2.jpg');
 
+  // Resources Covers
   export default {
     computed: {
       HOME_PAGE: () => HOME_PAGE,
@@ -82,6 +89,8 @@
       ASSIGNMENT_PAGE: () => ASSIGNMENT_PAGE,
       PROJECT_PAGE: () => PROJECT_PAGE,
       COURSE_MATERIAL_PAGE: () => COURSE_MATERIAL_PAGE,
+      // Images
+      LOGO: () => LOGO,
       isMainMenuVisible() {
         switch (this.$vuetify.breakpoint.name) {
           case 'xs':
@@ -110,17 +119,17 @@
             };
           case 'md':
             return {
-              courseTitle: 'text-h1',
+              courseTitle: 'text-h2',
               courseDescription: 'text-h4',
             };
           case 'lg':
             return {
-              courseTitle: 'text-h1',
+              courseTitle: 'text-h2',
               courseDescription: 'text-h4',
             };
           case 'xl':
             return {
-              courseTitle: 'text-h1',
+              courseTitle: 'text-h2',
               courseDescription: 'text-h4',
             };
         }
@@ -128,11 +137,12 @@
     },
     data: () => ({
       page: HOME_PAGE,
-      value: -1,
+
       // Course Details
       course: {
         title: "Course Name",
-        subtitle: "More Details about course"
+        subtitle: "More Details about course",
+        description: "The theory of computation includes several topics: automata theory, formal languages and grammars, computability, and complexity. Together, this material constitutes the theoretical foundation of computer science. Loosely speaking we can think of automata, grammars, and computability as the study of what can be done by computers in principle, while complexity addresses what can be done in practice...",
       },
 
       // Main Menu
@@ -140,22 +150,27 @@
         {
           pageName: HOME_PAGE,
           text: "Home",
+          icon: 'mdi-home'
         },
         {
           pageName: SCHEDULE_PAGE,
           text: "Schedule",
+          icon: 'mdi-calendar'
         },
         {
           pageName: ASSIGNMENT_PAGE,
           text: "Assignments",
+          icon: 'mdi-book-open'
         },
         {
           pageName: PROJECT_PAGE,
           text: "Projects",
+          icon: 'mdi-rocket'
         },
         {
           pageName: COURSE_MATERIAL_PAGE,
           text: "Resources",
+          icon: 'mdi-book'
         },
       ],
 
@@ -187,9 +202,9 @@
       schedule: {
         events: [
           {
-            name: 'Event 1',
-            start: '2021-02-01 12:30',
-            end: '2021-02-09 15:30',
+            name: 'Introduction',
+            start: '2021-02-25 18:00',
+            end: '2021-02-25 20:00',
             color: 'red'
           },
           {
@@ -239,18 +254,18 @@
 
       // Projects
       projects: [
-        {
-          name: "Project number 1",
-          file: ''
-        },
-        {
-          name: "Project number 2",
-          file: ''
-        },
-        {
-          name: "Project number 3",
-          file: ''
-        }
+        // {
+        //   name: "Project number 1",
+        //   file: ''
+        // },
+        // {
+        //   name: "Project number 2",
+        //   file: ''
+        // },
+        // {
+        //   name: "Project number 3",
+        //   file: ''
+        // }
       ],
 
       // Characters
@@ -341,7 +356,7 @@
         ]
       }
     }),
-    components: { Schedule, CourseMaterials, Footer, About },
+    components: { Schedule, CourseMaterials, Footer, About, Assignments },
   }
 </script>
 
