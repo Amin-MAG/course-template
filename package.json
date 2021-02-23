@@ -10,8 +10,9 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.12.5",
+    "@nuxtjs/vuetify": "^1.11.3",
     "core-js": "^3.8.3",
     "nuxt": "^2.14.12",
-    "@nuxtjs/vuetify": "^1.11.3"
+    "vue-lottie": "^0.2.1"
   }
 }
