@@ -82,6 +82,7 @@
   const REF_BOOK_1 = require('../static/images/ref_book1.jpg');
   const REF_BOOK_2 = require('../static/images/ref_book2.jpg');
 
+  // Resources Covers
   export default {
     computed: {
       HOME_PAGE: () => HOME_PAGE,

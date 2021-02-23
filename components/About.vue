@@ -43,7 +43,7 @@
         </v-col>
 
         <v-col cols="8">
-          <div :class="`${textSize.charactersTitle} ${textSize.charactersTitleAlign}`">Teacher Assistants</div>
+          <div :class="`${textSize.charactersTitle} ${textSize.charactersTitleAlign}`">Teaching Assistants</div>
           <v-row>
             <v-col v-for="(ta, index) in people.assistants" :key="index" :cols="assistantsColumns"
                    class="justify-center">
