@@ -1,0 +1,53 @@
+{
+  "name": "Course Template",
+  "short_name": "Course Template",
+  "description": "## Build Setup",
+  "icons": [
+    {
+      "src": "/course-template/_nuxt/icons/icon_64x64.fd6f93.png",
+      "sizes": "64x64",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/course-template/_nuxt/icons/icon_120x120.fd6f93.png",
+      "sizes": "120x120",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/course-template/_nuxt/icons/icon_144x144.fd6f93.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/course-template/_nuxt/icons/icon_152x152.fd6f93.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/course-template/_nuxt/icons/icon_192x192.fd6f93.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/course-template/_nuxt/icons/icon_384x384.fd6f93.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/course-template/_nuxt/icons/icon_512x512.fd6f93.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/course-template/?standalone=true",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "lang": "en"
+}
