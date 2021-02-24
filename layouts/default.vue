@@ -3,7 +3,7 @@
     <v-main>
       <v-container :class="`${sizes.headingTopMargin}`">
         <nuxt/>
-        <Footer/>
+        <Footer v-if="hasfooter"/>
       </v-container>
     </v-main>
   </v-app>
@@ -34,6 +34,20 @@
             return {
               headingTopMargin: 'my-5'
             };
+        }
+      },
+      hasfooter(){
+        switch (this.$vuetify.breakpoint.name) {
+          case 'xs':
+            return false;
+          case 'sm':
+            return false;
+          case 'md':
+            return true;
+          case 'lg':
+            return true;
+          case 'xl':
+            return true;
         }
       }
     }
