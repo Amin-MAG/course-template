@@ -43,10 +43,23 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '@nuxtjs/pwa',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
+
+  pwa: {
+    meta: {
+      title: 'Course Template',
+      author: 'Amin-MAG',
+    },
+    manifest: {
+      name: 'Course Template',
+      short_name: 'Course Template',
+      lang: 'en',
+    },
+  },
 
   router: {
     base: '/course-template/',

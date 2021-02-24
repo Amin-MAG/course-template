@@ -9,12 +9,9 @@
           :key="index"
           :cols="materialsColumns">
           <v-card
-          height="600">
+          height="530">
             <v-img :src="material.cover" height="400"/>
             <v-card-title>{{material.name}}</v-card-title>
-            <v-card-text>
-              <div>{{material.description}}</div>
-            </v-card-text>
             <v-card-actions>
               <v-spacer/>
               <v-btn text :href="material.file">
@@ -68,7 +65,7 @@
           case 'md':
             return 6;
           case 'lg':
-            return 6;
+            return 5;
           case 'xl':
             return 4;
         }

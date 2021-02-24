@@ -12,15 +12,15 @@
           </v-list-item-avatar>
           <v-list-item-title :class="`${sizes.assignmentText}`" v-text="hw.name"/>
           <v-list-item-action>
-            <v-btn text>
-              <v-icon class="mr-2" color="green">mdi-download</v-icon>
+            <v-btn text icon>
+              <v-icon color="green">mdi-download</v-icon>
             </v-btn>
           </v-list-item-action>
         </v-list-item>
       </v-list>
       <div v-else>
-        <lottie class="mt-8" :width="sizes.lottieSize" :options="searchingLottie"/>
-        <div class="text-center text-body-1">Nothing to show</div>
+        <lottie :width="sizes.lottieSize" :title="'empty'" :options="searchingLottie"/>
+        <div class="text-caption mt-n12 text-center">It is empty.</div>
       </div>
     </v-col>
     <v-col cols="1"/>

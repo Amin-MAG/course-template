@@ -29,7 +29,7 @@
         <v-col :cols="12-columns.assistants-columns.distance" class="justify-center">
           <div :class="`${textSize.charactersTitle} ${textSize.charactersTitleAlign}`">Instructor</div>
           <div
-            class="pa-4 d-flex flex-column align-center justify-center">
+            class="pa-2 d-flex flex-column align-center justify-center">
             <v-img
               class="rounded-circle"
               width="100%"
@@ -51,7 +51,7 @@
             <v-col v-for="(ta, index) in people.assistants" :key="index" :cols="columns.assistant"
                    class="justify-center">
               <div
-                class="pa-4 d-flex flex-column align-center justify-center">
+                class="pa-2 d-flex flex-column align-center justify-center">
                 <v-img
                   class="rounded-circle"
                   width="100%"
@@ -100,9 +100,9 @@
             };
           case 'lg':
             return {
-              assistants: 9,
-              assistant: 4,
-              distance: 0,
+              assistants: 8,
+              assistant: 3,
+              distance: 2,
             };
           case 'xl':
             return {
@@ -129,13 +129,13 @@
           case 'md':
             return {
               charactersTitle: 'text-h5',
-              characters: 'text-h7',
+              characters: 'text-caption',
               charactersTitleAlign: ''
             };
           case 'lg':
             return {
               charactersTitle: 'text-h5',
-              characters: 'text-h7',
+              characters: 'text-caption',
               charactersTitleAlign: ''
             };
           case 'xl':
